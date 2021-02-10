@@ -29,7 +29,7 @@ func Init(argv []string) error {
 	subCmd := flag.NewFlagSet("init-systemctl", flag.ExitOnError)
 	user := subCmd.String("user", "root", "The os user")
 
-	subCmd.Parse(argv)
+	subCmd.Parse(argv[1:])
 
 	withUser := strings.ReplaceAll(systemctlConfig, "__user_name__", *user)
 

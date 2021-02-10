@@ -28,7 +28,7 @@ func main() {
 	case "service":
 		err = service.StartService()
 	case "init-systemctl":
-		err = systemctl.Init()
+		err = systemctl.Init(argv)
 	}
 
 	if err != nil {
