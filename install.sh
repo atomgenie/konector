@@ -16,5 +16,5 @@ konector init --username=$GITHUB_USER
 echo "Konector systemctl"
 sudo konector init-systemctl --user=$USER
 echo "systemctl enable & start"
-systemctl enable konector
-systemctl start konector
+sudo systemctl enable konector
+sudo systemctl start konector
