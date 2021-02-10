@@ -6,7 +6,7 @@ exit 1
 fi
 
 echo "DOWNLOAD"
-curl -sfL -o konector https://github.com/atomgenie/konector/releases/download/1.0.0/konector
+curl -L -o konector https://github.com/atomgenie/konector/releases/download/1.0.0/konector
 echo "CHMOD"
 chmod u+x konector
 echo "/usr/bin"
