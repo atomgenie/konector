@@ -10,7 +10,7 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-User=%i
+User=%u
 ExecStart=/usr/bin/env konector service
 Restart=on-failure
 RestartSec=30
