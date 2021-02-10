@@ -1,6 +1,10 @@
 package systemctl
 
-import "io/ioutil"
+import (
+	"flag"
+	"io/ioutil"
+	"strings"
+)
 
 const systemctlConfig = `
 [Unit]
@@ -10,7 +14,7 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-User=%u
+User=__user_name__
 ExecStart=/usr/bin/env konector service
 Restart=on-failure
 RestartSec=30
@@ -21,7 +25,14 @@ WantedBy=multi-user.target
 `
 
 // Init systemctl
-func Init() error {
-	err := ioutil.WriteFile("/etc/systemd/system/konector.service", []byte(systemctlConfig), 0777)
+func Init(argv []string) error {
+	subCmd := flag.NewFlagSet("init-systemctl", flag.ExitOnError)
+	user := subCmd.String("user", "root", "The os user")
+
+	subCmd.Parse(argv)
+
+	withUser := strings.ReplaceAll(systemctlConfig, "__user_name__", *user)
+
+	err := ioutil.WriteFile("/etc/systemd/system/konector.service", []byte(withUser), 0777)
 	return err
 }
