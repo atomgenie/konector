@@ -30,8 +30,8 @@ func Init(argv []string) error {
 	}
 
 	config := config.UserConfig{
-		Username: *username,
-		Interval: *interval,
+		Usernames: []string{*username},
+		Interval:  *interval,
 	}
 
 	if err := config.Save(); err != nil {

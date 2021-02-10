@@ -23,6 +23,7 @@ func Load() (UserConfig, error) {
 		return config, err
 	}
 
+	defer file.Close()
 	err = json.NewDecoder(file).Decode(&config)
 
 	if err != nil {

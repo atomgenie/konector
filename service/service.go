@@ -18,17 +18,28 @@ func StartService() error {
 	// catch all signals since not explicitly listing
 	signal.Notify(sigs, syscall.SIGQUIT, syscall.SIGTERM)
 
-	config, err := config.Load()
-
-	if err != nil {
-		return err
-	}
-
 	for {
-		data, err := github.GetSSHKeys(config.Username)
+
+		config, err := config.Load()
 
 		if err != nil {
 			return err
+		}
+
+		var data github.APISSHKeys = []struct {
+			ID  int    "json:\"id\""
+			Key string "json:\"key\""
+		}{}
+
+		for _, username := range config.Usernames {
+
+			_data, err := github.GetSSHKeys(username)
+
+			if err != nil {
+				return err
+			}
+
+			data = append(data, _data...)
 		}
 
 		err = ssh.SaveKeys(data)
