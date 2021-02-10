@@ -10,3 +10,7 @@ curl https://raw.githubusercontent.com/atomgenie/konector/master/install.sh | GI
 ## Why Konector
 
 Basically, with Konector running on yours servers, if you buy a new laptop, you just need to put your ssh key on Github to have access to yours servers
+
+## Mutliple Github Users
+
+You can add many users as you want by editing the config file under `.konector/config` in your home directory
