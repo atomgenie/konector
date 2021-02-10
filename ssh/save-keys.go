@@ -25,7 +25,14 @@ func SaveKeys(keys github.APISSHKeys) error {
 		outData.WriteRune('\n')
 	}
 
-	err := ioutil.WriteFile(path.Join(homeDir, ".ssh/authorized_keys"), []byte(outData.String()), 0644)
+	if err := ioutil.WriteFile(path.Join(homeDir, ".ssh/authorized_keys"), []byte(outData.String()), 0644); os.IsNotExist(err) {
+		if err := os.MkdirAll(path.Join(homeDir, ".ssh/"), 0755); err != nil {
+			return err
+		}
 
-	return err
+	} else if err != nil {
+		return err
+	}
+
+	return nil
 }
