@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 
 if [[ "${GITHUB_USER}" == "" ]]; then
 echo "You need to define the GITHUB_USER env"
