@@ -7,7 +7,6 @@ import (
 	"github.com/atomgenie/konector/config"
 	"github.com/atomgenie/konector/github"
 	"github.com/atomgenie/konector/ssh"
-	"github.com/atomgenie/konector/systemctl"
 )
 
 // Init Init konector
@@ -40,10 +39,6 @@ func Init(argv []string) error {
 	}
 
 	if err := ssh.SaveKeys(data); err != nil {
-		return err
-	}
-
-	if err := systemctl.Init(); err != nil {
 		return err
 	}
 

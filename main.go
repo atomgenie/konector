@@ -2,10 +2,12 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 
 	"github.com/atomgenie/konector/initialise"
 	"github.com/atomgenie/konector/service"
+	"github.com/atomgenie/konector/systemctl"
 )
 
 func main() {
@@ -13,6 +15,7 @@ func main() {
 	argv := flag.Args()
 
 	if len(argv) == 0 {
+		fmt.Println("init | service | init-systemctl")
 		flag.Usage()
 		return
 	}
@@ -24,6 +27,8 @@ func main() {
 		err = initialise.Init(argv)
 	case "service":
 		err = service.StartService()
+	case "init-systemctl":
+		err = systemctl.Init()
 	}
 
 	if err != nil {
