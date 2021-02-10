@@ -3,6 +3,7 @@ package service
 import (
 	"os"
 	"os/signal"
+	"syscall"
 	"time"
 
 	"github.com/atomgenie/konector/config"
@@ -15,7 +16,7 @@ func StartService() error {
 	sigs := make(chan os.Signal, 1)
 
 	// catch all signals since not explicitly listing
-	signal.Notify(sigs)
+	signal.Notify(sigs, syscall.SIGQUIT, syscall.SIGTERM)
 
 	config, err := config.Load()
 
